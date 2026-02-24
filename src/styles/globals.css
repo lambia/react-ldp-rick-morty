@@ -29,3 +29,19 @@ body {
   background: #222;
   color: white;
 }
+
+.characters-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card {
+  padding: 1rem;
+  background: #333;
+  width: calc((100% - 3rem) / 4);
+}
+
+.card-image {
+  width: 100%;
+}
