@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  min-height: 100vh;
+  background-color: #222;
+  color: white;
+  padding: 1rem;
+}
+
+.componente {
+  border: solid 1px crimson;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+  background: #222;
+  color: white;
+}
