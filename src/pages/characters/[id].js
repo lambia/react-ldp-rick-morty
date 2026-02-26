@@ -13,6 +13,8 @@ export default function CharactersPage() {
 
 	if (!router.isReady) return <div>Loading...</div>
 
+	console.log("Qui dovrei recuperare i dati dall'api /characters/id ");
+
 	return (
 		<>
 			<Head>
