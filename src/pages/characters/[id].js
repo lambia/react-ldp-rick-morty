@@ -1,7 +1,17 @@
 import Head from "next/head";
+import { useRouter } from "next/router"
+
+import CharactersList from "@/components/CharactersList"
 import Header from "@/components/Header"
 
-export default function HomePage() {
+import { useState } from "react";
+
+export default function CharactersPage() {
+
+	const router = useRouter();
+	const { id } = router.query;
+
+	if (!router.isReady) return <div>Loading...</div>
 
 	return (
 		<>
@@ -13,8 +23,9 @@ export default function HomePage() {
 			</Head>
 
 			<Header />
-			<h1>Benvenuto</h1>
-			<div>Pagina home</div>
+
+			<h2>Pagina dettagli</h2>
+			<h3>ID: {id}</h3>
 
 		</>
 	);

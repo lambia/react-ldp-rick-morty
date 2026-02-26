@@ -35,7 +35,7 @@ export default function CharactersList() {
 		<button onClick={getDati}>Popola</button>
 		<div className="characters-list">
 			{characters.map(personaggio =>
-				<Card key={personaggio.id} name={personaggio.name} image={personaggio.image} />
+				<Card key={personaggio.id} name={personaggio.name} image={personaggio.image} id={personaggio.id} />
 			)}
 		</div>
 	</div>
