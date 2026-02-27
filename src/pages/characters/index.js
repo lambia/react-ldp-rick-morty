@@ -8,8 +8,11 @@ import Header from "@/components/Header"
 // import data from "@/data/data";
 
 import { useState } from "react";
+import Componente from "@/components/Componente";
 
 export default function CharactersPage() {
+
+
 
 	return (
 		<>
@@ -26,6 +29,7 @@ export default function CharactersPage() {
       */}
 			<Header />
 
+			<Componente />
 			<CharactersList />
 
 		</>

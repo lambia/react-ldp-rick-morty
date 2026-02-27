@@ -1,7 +1,10 @@
 import Head from "next/head";
 import Header from "@/components/Header"
+import { useCounter } from "@/contexts/CounterContext"
 
 export default function HomePage() {
+
+	const { count, setCount } = useCounter();
 
 	return (
 		<>
@@ -15,6 +18,7 @@ export default function HomePage() {
 			<Header />
 			<h1>Benvenuto</h1>
 			<div>Pagina home</div>
+			<p>Count: {count}</p>
 
 		</>
 	);
