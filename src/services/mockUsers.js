@@ -2,6 +2,19 @@ import dati from "@/data/users";
 
 const { users, posts } = dati;
 
+function getQualcosa(n) {
+
+	//....
+	if (n >= 42) {
+		throw new Error("Non puoi farlo!")
+	}
+
+	const quadrato = n * n;
+	console.log("Esecuzione della funzione", quadrato);
+
+	return quadrato;
+}
+
 function getUser(id) {
 
 	return new Promise((resolve, reject) => {
@@ -18,10 +31,10 @@ function getUser(id) {
 				if (user) {
 					resolve(user);
 				} else {
-					reject(new Error(`User not found per user id: ${id}`));
+					reject(new Error(`user.error: User not found per user id: ${id}`));
 				}
 			} else {
-				reject(new Error(`Random API error per user id: ${id}`));
+				reject(new Error(`user.error: Random API error per user id: ${id}`));
 			}
 
 		}, 1000);
@@ -46,10 +59,10 @@ function getPost(id) {
 				if (post) {
 					resolve(post);
 				} else {
-					reject(new Error(`User not found per post id: ${id}`));
+					reject(new Error(`post.error: User not found per post id: ${id}`));
 				}
 			} else {
-				reject(new Error(`Random API error per post id: ${id}`));
+				reject(new Error(`post.error: Random API error per post id: ${id}`));
 			}
 
 		}, 1000);
@@ -59,4 +72,4 @@ function getPost(id) {
 }
 
 
-export { getUser, getPost }
+export { getUser, getPost, getQualcosa }

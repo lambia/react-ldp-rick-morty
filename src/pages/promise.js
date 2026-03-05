@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Header from "@/components/Header"
 import { useState } from "react";
-import { getUser, getPost } from "@/services/mockUsers"
+import { getUser, getPost, getQualcosa } from "@/services/mockUsers"
 
 export default function PromisePage() {
 
@@ -105,6 +105,19 @@ export default function PromisePage() {
 		console.log("==>", utente, post);
 	}
 
+	async function recuperaDati() {
+		try {
+			const utente = await getUser(2);
+			console.log("Trovato utente", utente);
+
+			const post = await getPost(utente.postId);
+			console.log("Trovato anche il post", post);
+
+		} catch (error) {
+			console.error(`Errore nel recuperare dati`, error.message)
+		}
+	}
+
 	async function gestisciClick() {
 
 		//...fai cose...
@@ -113,6 +126,56 @@ export default function PromisePage() {
 		console.log(await recuperaDati_CatchSeparati());
 
 		//...fai cose...
+
+	}
+
+	function calcolaQuadrato() {
+
+		const quadrato3 = getQualcosa(3);
+		console.log(quadrato3);
+
+		try {
+			const quadrato42 = getQualcosa(42);
+			console.log(quadrato42);
+		} catch (error) {
+			console.error("qualcosa è andato storto", error.message)
+		}
+
+		console.log("altro ancora");
+	}
+
+	function getMultipleUsers() {
+
+		// const chiamate = [ false, false ];
+		// const risultati = [];
+
+		// const bob = getUser(1).then(utente => {
+		// 	console.log("dati ottenuti per 1", utente);
+		// 	chiamate[0] = true;
+		// 	risultati.push(utente);
+		// });
+
+		// const alice = getUser(2).then(utente => {
+		// 	console.log("dati ottenuti per 2", utente);
+		// 	chiamate[1] = true;
+		// 	risultati.push(utente);
+		// });
+
+		const promesse = [
+			getUser(1),
+			getUser(2)
+		];
+
+		const x = Promise.all(promesse);
+
+		x.then(dati => {
+			const [bob, alice] = dati;
+
+			console.log(bob);
+			console.log(alice);
+		}).catch(err => {
+			console.error("errore: ", err);
+		});
 
 	}
 
@@ -133,11 +196,14 @@ export default function PromisePage() {
 
 			<div>
 				<h2>Lista utenti</h2>
-				<button onClick={gestisciClick}>Recupera dati</button>
+				<button onClick={recuperaDati}>Recupera dati</button>
 				<ul>
 					{users.map(utente => <li>{utente.id}. {utente.name}</li>)}
 				</ul>
 			</div>
+
+			<button onClick={calcolaQuadrato}>Calcola quadrato</button>
+			<button onClick={getMultipleUsers}>Recupera utenti</button>
 
 		</>
 	);
