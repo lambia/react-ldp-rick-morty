@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Header from "@/components/Header"
 import { useState } from "react";
-import { getUser } from "@/services/mockUsers"
+import { getUser, getPost } from "@/services/mockUsers"
 
 export default function PromisePage() {
 
@@ -49,13 +49,71 @@ export default function PromisePage() {
 		});
 	}
 
-	function getDatiEsterni() {
-
+	function recuperaDati_Then() {
 		getUser(2).then(utente => {
 			console.log("Trovato l'utente", utente);
+
+			getPost(utente.postId).then(post => {
+				console.log("Trovato anche il post dell'utente", post);
+			}).catch(err => {
+				console.error("Qualcosa è andato storto per POST: ", err.message);
+			});
+
 		}).catch(err => {
-			console.error("Qualcosa è andato storto: ", err.message);
+			console.error("Qualcosa è andato storto per USER: ", err.message);
 		});
+
+		console.log("Dopo il then, eseguito subito, prima dei dati");
+	}
+
+	async function recuperaDati_SingoloCatch() {
+		const post = null;
+
+		try {
+			const utente = await getUser(2);
+			console.log("Trovato utente", utente);
+			const post = await getPost(utente.postId);
+			console.log("Trovato anche il post", post);
+		} catch {
+			console.error("Qualcosa è andato storto");
+		}
+
+		console.log("Qui tutto bene");
+
+		return post;
+	}
+
+	async function recuperaDati_CatchSeparati() {
+		let utente = null;
+		let post = null;
+
+		try {
+			utente = await getUser(2);
+			console.log("Trovato utente", utente);
+		} catch (error) {
+			console.error("Errore nel recuperare l'utente")
+			// throw new Error("Impossibile recuperare l'utente");
+		}
+
+		try {
+			post = await getPost(utente.postId);
+			console.log("Trovato anche il post", post);
+		} catch (error) {
+			console.error("Errore nel recuperare il post")
+		}
+
+		console.log("==>", utente, post);
+	}
+
+	async function gestisciClick() {
+
+		//...fai cose...
+
+		// recuperaDati().then(console.log);
+		console.log(await recuperaDati_CatchSeparati());
+
+		//...fai cose...
+
 	}
 
 	return (
@@ -75,7 +133,7 @@ export default function PromisePage() {
 
 			<div>
 				<h2>Lista utenti</h2>
-				<button onClick={getDatiEsterni}>Recupera dati</button>
+				<button onClick={gestisciClick}>Recupera dati</button>
 				<ul>
 					{users.map(utente => <li>{utente.id}. {utente.name}</li>)}
 				</ul>
