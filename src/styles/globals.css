@@ -46,6 +46,11 @@ body {
 	width: 100%;
 }
 
+nav {
+	display: flex;
+	gap: 0.5rem;
+}
+
 a.nav-link {
 	color: aqua;
 	text-decoration: none;

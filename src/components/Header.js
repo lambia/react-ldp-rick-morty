@@ -23,5 +23,6 @@ export default function Header() {
 	return <nav>
 		<Link href="/" className={isActive("/")}>Home</Link>
 		<Link href="/characters" className={isActive("/characters")}>Personaggi</Link>
+		<Link href="/promise" className={isActive("/promise")}>Promessa</Link>
 	</nav>
 }

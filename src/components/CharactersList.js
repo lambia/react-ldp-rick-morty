@@ -14,6 +14,7 @@ export default function CharactersList() {
 	}
 
 	function getDati() {
+
 		axios.get(`${apiUrl}/${characterEndpoint}`).then(r => {
 
 			const data = r.data; //dati del server per come li incapsula axios
